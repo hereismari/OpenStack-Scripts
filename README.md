@@ -28,7 +28,7 @@ In this tutorial it's supposed you have access to an openstack distribution and 
 
       3.1 $ source your_project-openrc.sh
 
-      Obs: you can edit OS_PASSWORD="your password", so it don't asks your password anymore.
+      Obs: you can edit OS_PASSWORD="your password", so it doesn't asks your password anymore.
 
 4. You're ready to upload files to swift openstack!
 
