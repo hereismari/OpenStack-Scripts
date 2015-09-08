@@ -56,7 +56,7 @@ else:
 cluster_id = 'cluster_id'
 project_id = 'project_id'
 
-connector = ConnectionGetter(user, key, project_name, project_id, 'openstack_id')
+connector = ConnectionGetter(user, key, project_name, project_id, 'openstack_IP')
 
 keystone_util = UtilKeystone(connector.keystone())
 token_ref_id = keystone_util.getTokenRef(user, key, project_name).id
