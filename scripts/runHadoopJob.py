@@ -68,6 +68,6 @@ output_ds_name = 'output_' + file_name + '_' + exec_date
 input_ds = sahara_util.createDataSource(input_ds_name, input_container, 'swift://' + input_container + '.sahara/' + file_name, user, key)
 output_ds = sahara_util.createDataSource(output_ds_name, output_container, 'swift://' + output_container + '.sahara/' + output_ds_name, user, key)
 
-sahara_util.runJob(job_name, job_id, cluster_id, map_output_key, map_output_value,
+sahara_util.runMapReduceJob(job_name, job_id, cluster_id, map_output_key, map_output_value,
         input_ds.id, output_ds.id)
 
