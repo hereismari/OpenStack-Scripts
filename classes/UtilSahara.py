@@ -23,7 +23,7 @@ class UtilSahara():
     def listDataSources(self):
         print self.connection.data_sources.list()
 
-    def runJob(self, job_name, job_id, cluster_id, map_output_key, map_output_value,
+    def runMapReduceJob(self, job_name, job_id, cluster_id, map_output_key, map_output_value,
         input_ds_id, output_ds_id):
 
         job_configs = {
