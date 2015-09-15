@@ -8,7 +8,6 @@ class UtilSahara():
         self.connection = connection
 
     def createDataSource(self, name, container, container_url, user, key):
-
         print 'Creating Data Source ' + name + ' ...'
         data_source = self.connection.data_sources.create(name,
                                          container,
