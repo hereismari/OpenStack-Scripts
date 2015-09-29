@@ -16,7 +16,7 @@ class UtilSahara():
         print 'Success! Data Source has been created!'
         return data_source
 
-    def listDataSources(self, connection):
+    def listDataSources(self):
         print connection.data_sources.list()
 
     #The template must exist already, wait time ~ 20 min
@@ -94,6 +94,6 @@ class UtilSahara():
                                         cluster_id, None, None,
                                         job_configs)
         print 'Job is being executed!'
-        if verify: checkJob(job, wait_time)
-        else: print 'check success on Horizon'
+        #if verify: checkJob(job, wait_time)
+        #else: print 'check success on Horizon'
 
