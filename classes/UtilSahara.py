@@ -94,6 +94,17 @@ class UtilSahara():
                                         cluster_id, None, None,
                                         job_configs)
         print 'Job is being executed!'
-        #if verify: checkJob(job, wait_time)
-        #else: print 'check success on Horizon'
-
+        if verify:
+            cont = 0
+            while True:
+                time.sleep(5)
+                status = self.connection.job_executions.get(job.id).info['status']
+                print status
+                if status in ['SUCCEEDED', 'FAILED', 'KILLED']: break
+                cont += 1
+                if cont >= wait_time: 
+                    print 'job is being killed...'
+                    self.connection.job_executions.delete(job)
+                    break
+        else: print 'check success on Horizon'
+        return job.id
