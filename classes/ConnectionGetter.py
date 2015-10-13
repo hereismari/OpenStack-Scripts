@@ -23,7 +23,7 @@ class ConnectionGetter(object):
         sahara_url = 'http://%s:8386/v1.1/%s' % (self.main_ip, self.project_id)
         sahara_client = saharaclient(sahara_url=sahara_url, input_auth_token=token_id)
 
-        print 'Connected to Sahara'
+        print 'Success! Connected to Sahara!'
         return sahara_client
 
     ''' Was tested is working fine! '''
@@ -36,7 +36,7 @@ class ConnectionGetter(object):
                                  tenant_name=self.project_name,
                                  auth_url = 'http://%s:5000/v2.0' % self.main_ip)
 
-        print 'Connected to Keystone'
+        print 'Success! Connected to Keystone!'
         return keystone_connection
 
     ''' Was tested is working fine! '''
@@ -57,6 +57,6 @@ class ConnectionGetter(object):
                 auth_version=3,
         )
 
-        print 'Connected to Swift'
+        print 'Success! Connected to Swift!'
         return swift_connection
 
