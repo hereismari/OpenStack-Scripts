@@ -15,7 +15,10 @@ class ConnectionGetter(object):
         self.project_id = project_id
         self.main_ip = main_ip
 
-    ''' Was tested is working fine! '''
+    '''
+        This method receives the token_id, and returns a sahara_client, pay atention to versions
+        if your configurations are different change it! (You can get these configurations trough Horizon)
+    '''
     def sahara(self, token_id):
 
         print 'Establishing connection to Sahara...'
@@ -26,7 +29,6 @@ class ConnectionGetter(object):
         print 'Success! Connected to Sahara!'
         return sahara_client
 
-    ''' Was tested is working fine! '''
     def keystone(self):
 
         print 'Establishing connection to Keystone...'
@@ -39,7 +41,6 @@ class ConnectionGetter(object):
         print 'Success! Connected to Keystone!'
         return keystone_connection
 
-    ''' Was tested is working fine! '''
     def swift(self):
 
         osOptions = dict()
