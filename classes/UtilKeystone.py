@@ -1,6 +1,3 @@
-import swiftclient
-import subprocess
-import os
 
 class UtilKeystone():
 

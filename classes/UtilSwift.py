@@ -1,6 +1,5 @@
 from ConnectionGetter import *
 import swiftclient
-import subprocess
 import os
 
 ''' Was tested is working fine! '''
