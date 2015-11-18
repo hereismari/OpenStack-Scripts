@@ -1,7 +1,7 @@
 {
-    "user" : "",
-    "project_name" : "",
-    "project_id" : "",
+    "user" : "marianne",
+    "project_name" : "Big data",
+    "project_id" : "bdbc102bcc8e41569b9a0cb8119ddd73",
     "net_id" : "",
-    "main_ip" : ""
+    "main_ip" : "10.5.0.14"
 }

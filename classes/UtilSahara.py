@@ -6,12 +6,12 @@ class UtilSahara():
     def __init__(self, connection):
         self.connection = connection
 
-    def createDataSource(self, name, container, container_url, user, key):
+    def createDataSource(self, name, ds_url, ds_type, description="", user=None, key=None):
         print 'Creating Data Source ' + name + ' ...'
         data_source = self.connection.data_sources.create(name,
-                                         container,
-                                         'swift',
-                                         container_url,
+                                         description,
+                                         ds_type,
+                                         ds_url,
                                          user,
                                          key)
         print 'Success! Data Source has been created!'
@@ -30,7 +30,7 @@ class UtilSahara():
         return cluster_id
 
     #The template must exist already, wait time is ~ 20 min if not setted
-    ''' it creates a hadoop cluster of plugin Vanilla and version 2.6.0 ''' 
+	''' it creates a hadoop cluster of plugin Vanilla and version 2.6.0 ''' 
     def createClusterHadoop(self, name, image_id, template_id, net_id, user_keypair, wait_time=250, verify=True):
 
         print 'Creating hadoop cluster...'
@@ -100,16 +100,18 @@ class UtilSahara():
 
     #wait time is equal to ~ 2 hours if not setted
     def runStreamingJob(self, job_template_id, cluster_id, streaming_mapper, streaming_reducer,
-        input_ds_id, output_ds_id, wait_time=1500, verify=True, reduces=1):
+        input_ds_id=None, output_ds_id=None, input_hdfs_path="", output_hdfs_path="", wait_time=1500, verify=True, reduces=1):
 
         job_configs = {
             'configs' : {
             'mapred.reduce.tasks' : str(reduces),
             'edp.streaming.mapper': streaming_mapper,
             'edp.streaming.reducer': streaming_reducer },
-            'args': [],
+            'args': [input_hdfs_path,output_hdfs_path],
             'params': {}
         }
+        
+        print "job_configs:", job_configs
 
         job = self.connection.job_executions.create(job_template_id,
                                    cluster_id,
@@ -136,6 +138,26 @@ class UtilSahara():
                 instances_ip.append(instance['internal_ip'])
                 print 'Success!'
         return instances_ip
+
+    def get_master_ip(self, cluster_id):
+        cluster = self.connection.clusters.get(cluster_id)
+        print 'Getting master IP...'
+        for node_group in cluster.node_groups:
+            for instance in node_group['instances']:
+                if 'master' in instance['instance_name']:
+                    master_ip = instance['internal_ip']
+                    print 'master IP =', master_ip
+                    return master_ip
+
+    def get_master_id(self, cluster_id):
+        cluster = self.connection.clusters.get(cluster_id)
+        print 'Getting master ID...'
+        for node_group in cluster.node_groups:
+            for instance in node_group['instances']:
+                if 'master' in instance['instance_name']:
+                    master_id = instance['instance_id']
+                    print 'master id =', master_id
+                    return master_id
 
     def verifyClusterCreation(self, cluster_id, wait_time):
         cont = 0
@@ -201,5 +223,3 @@ class UtilSahara():
         else:
             print "Job didn't succeed so job time isn't available"
         return {'status' : job_status , 'id' : job_id, 'time' : job_time}
-Status API Training Shop Blog About Pricing
-© 2015 GitHub, Inc. Terms Privacy Security Contact Help

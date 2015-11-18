@@ -2,10 +2,10 @@ import swiftclient
 from novaclient.v2 import client as novaclient
 from keystoneclient.v2_0 import client as keystoneclient
 from saharaclient.api.client import Client as saharaclient
-import sys
-import os
-import subprocess
 
+'''
+    Pay atention to your OpenStack versions, if your configurations and versions are different change it! (You can get these configurations trough Horizon)
+'''
 class ConnectionGetter(object):
 
     def __init__(self, user, key, project_name, project_id, main_ip):
@@ -15,10 +15,6 @@ class ConnectionGetter(object):
         self.project_id = project_id
         self.main_ip = main_ip
 
-    '''
-        This method receives the token_id, and returns a sahara_client, pay atention to versions
-        if your configurations are different change it! (You can get these configurations trough Horizon)
-    '''
     def sahara(self, token_id):
 
         print 'Establishing connection to Sahara...'
@@ -40,6 +36,16 @@ class ConnectionGetter(object):
 
         print 'Success! Connected to Keystone!'
         return keystone_connection
+
+    def nova(self):
+
+        print 'Establishing connection to Nova...'
+
+        auth_url = 'http://%s:5000/v2.0' % self.main_ip
+        nova_connection = novaclient.Client(self.user, self.key, self.project_name, auth_url, service_type='compute')
+
+        print 'Connected to Nova'
+        return nova_connection
 
     def swift(self):
 
