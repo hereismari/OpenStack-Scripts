@@ -13,7 +13,7 @@ class UtilSwift():
         os.chdir(path)
         target = object_name
 
-        print 'Transfering file..'
+        print 'Transfering file ' + object_name
 
         with open(target, 'r') as input_file:
                 self.connection.put_object(container_name, target,
@@ -21,8 +21,19 @@ class UtilSwift():
                         content_type='text/plain')
 
                 print 'Object: ' + object_name + ' successfully transfered to '+ container_name
-        return target
+        
+    def storeFolder(self, path, folder_name, container_name):
 
+        os.chdir(path)
+        
+        print 'Transfering folder ' + folder_name
+        
+        for target in os.listdir(folder_name):
+            object_name = folder_name + '/' + target
+            self.storeFile(path, object_name, container_name)
+        
+        print 'Folder: ' + folder_name + ' successfully transfered to '+ container_name
+        
     def getFile(self, path, object_name, container_name):
 
         os.chdir( path )
