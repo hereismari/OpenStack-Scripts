@@ -48,11 +48,11 @@ input_container = 'input_container'
 
 if job_name == 'Job1':
     job_id = 'job1_id'
-    map_output_password = 'map_output_password'
+    map_output_key = 'map_output_key'
     map_output_value = 'map_output_value' #dont need the hadoop.org....
 elif job_name == 'Job2':
     job_id = 'job2_id'
-    map_output_password = 'map_output_password'
+    map_output_key = 'map_output_key'
     map_output_value = 'map_output_value'
 else:
     print 'Job doenst exists in the script'
