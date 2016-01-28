@@ -67,8 +67,8 @@ sahara_util = UtilSahara(connector.sahara(token_ref_id))
 exec_date = time.strftime('%Y%m%d%H%M%S')
 input_ds_name = 'input_' + file_name + '_' + exec_date
 output_ds_name = 'output_' + file_name + '_' + exec_date
-input_ds = sahara_util.createDataSource(input_ds_name, input_container, 'swift://' + input_container + '.sahara/' + file_name, 'swift', user, password)
-output_ds = sahara_util.createDataSource(output_ds_name, output_container, 'swift://' + output_container + '.sahara/' + output_ds_name, 'swif', user, password)
+input_ds = sahara_util.createDataSource(input_ds_name, input_container, 'swift', user, password)
+output_ds = sahara_util.createDataSource(output_ds_name, output_container, 'swift', user, password)
 
 sahara_util.runMapReduceJob(job_name, job_id, cluster_id, map_output_key, map_output_value, input_ds.id, output_ds.id)
 
