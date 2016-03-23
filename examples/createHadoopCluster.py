@@ -44,7 +44,7 @@ user = parser.get('user')
 project_name = parser.get('project_name')
 project_id = parser.get('project_id')
 main_ip = parser.get('main_ip')
-ned_id = parser.get('net_id')
+net_id = parser.get('net_id')
 
 connector = ConnectionGetter(user, key, project_name, project_id, main_ip)
 

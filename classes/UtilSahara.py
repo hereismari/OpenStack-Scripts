@@ -21,7 +21,7 @@ class UtilSahara():
         print self.connection.data_sources.list()
 
     #wait time is ~ 20 min if not setted
-    def deleteCluster(self, cluster_id, verify=True, wait_time=250):
+    def deleteCluster(self, cluster_id, verify=True, wait_time=1200):
         print 'Deleting cluster: ' + cluster_id
         self.connection.clusters.delete(cluster_id)
 
@@ -31,7 +31,7 @@ class UtilSahara():
 
     #The template must exist already, wait time is ~ 20 min if not setted
 	''' it creates a hadoop cluster of plugin Vanilla and version 2.6.0 ''' 
-    def createClusterHadoop(self, name, image_id, template_id, net_id, user_keypair, wait_time=250, verify=True):
+    def createClusterHadoop(self, name, image_id, template_id, net_id, user_keypair, wait_time=1200, verify=True):
 
         print 'Creating hadoop cluster...'
 
@@ -48,7 +48,7 @@ class UtilSahara():
 
     #wait time is equal to ~ 2 hours if not setted
     def runMapReduceJob(self, job_name, job_id, cluster_id, map_output_key, map_output_value,
-        input_ds_id, output_ds_id, wait_time=1500, verify=True, map_class=None, reduce_class=None, reduces='3'):
+        input_ds_id, output_ds_id, wait_time=7200, verify=True, map_class=None, reduce_class=None, reduces='3'):
 
         if map_class == None: map_class = job_name + '$Map'
         if reduce_class == None: reduce_class = job_name + '$Reduce'
@@ -76,7 +76,7 @@ class UtilSahara():
             print 'Check success on Horizon :)'
 
     #wait time is equal to ~ 2 hours if not setted
-    def runJavaActionJob(self, main_class, job_id, cluster_id, number_maps="3", number_reduces="1", wait_time=1500, verify=True, reduces='3', input_ds_id=None, output_ds_id=None):
+    def runJavaActionJob(self, main_class, job_id, cluster_id, number_maps="3", number_reduces="1", wait_time=7200, verify=True, reduces='3', input_ds_id=None, output_ds_id=None):
 
         job_configs = {
             'configs': {
@@ -100,7 +100,7 @@ class UtilSahara():
 
     #wait time is equal to ~ 2 hours if not setted
     def runStreamingJob(self, job_template_id, cluster_id, streaming_mapper, streaming_reducer,
-        input_ds_id=None, output_ds_id=None, input_hdfs_path="", output_hdfs_path="", wait_time=1500, verify=True, reduces=1):
+        input_ds_id=None, output_ds_id=None, input_hdfs_path="", output_hdfs_path="", wait_time=7200, verify=True, reduces=1):
 
         job_configs = {
             'configs' : {
@@ -160,6 +160,8 @@ class UtilSahara():
                     return master_id
 
     def verifyClusterCreation(self, cluster_id, wait_time):
+
+        wait_time = wait_time / 5 # status is only checked in an interval of 5 seconds
         cont = 0
         while True:
             time.sleep(5)
@@ -178,6 +180,8 @@ class UtilSahara():
                 break
 
     def verifyClusterDeletion(self, cluster_id, wait_time):
+	 
+         wait_time = wait_time / 5 # status is only checked in an interval of 5 seconds
          cont = 0
          while True:
              time.sleep(5)
@@ -195,6 +199,7 @@ class UtilSahara():
                  break
 
     def verifyJob(self, job_id, wait_time):
+	wait_time = wait_time / 5 # status is only checked in an interval of 5 seconds
         cont = 0
         while True:
             time.sleep(5)
