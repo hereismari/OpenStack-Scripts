@@ -1,7 +1,7 @@
 from classes.UtilSwift import *
 from classes.ConnectionGetter import *
 from classes.UtilSahara import *
-from classes.Utilpasswordstone import *
+from classes.UtilKeystone import *
 from utils.JsonParser import *
 
 import os
@@ -11,14 +11,9 @@ import time
 import getpass
 
 def howToUse():
-    how_to_use = '$python runHadoopJob.py <job> <file_name> <cluster_id>'
+    how_to_use = '$python runMapReduceJob.py <job> <file_name> <cluster_id>'
     print 'How to use:'
     print how_to_use
-
-def askForHelp():
-    print 'Wrong parameters!'
-    print '-----------------'
-    print 'for help try: $python runHadoopJob.py --help'
 
 MIN_NUM_ARGS = 4
 EMPTY_ARGS = 1
@@ -32,7 +27,7 @@ elif len(sys.argv) == MIN_NUM_ARGS:
     file_name = sys.argv[2]
 	cluster_id = sys.argv[3]
 else:
-    askForHelp()
+    howToUse()
     exit(1)
 
 password = getpass.getpass('password: ')

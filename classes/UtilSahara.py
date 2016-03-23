@@ -107,7 +107,7 @@ class UtilSahara():
             'mapred.reduce.tasks' : str(reduces),
             'edp.streaming.mapper': streaming_mapper,
             'edp.streaming.reducer': streaming_reducer },
-            'args': [input_hdfs_path,output_hdfs_path],
+            'args': [input_hdfs_path, output_hdfs_path],
             'params': {}
         }
         
