@@ -22,6 +22,10 @@ class UtilNova():
 	verifyInstanceCreation(instance.id, wait_time)	        	
 	return instance
 
+    def deleteInstance(self, instance):
+	print 'Deleting %s ...' % instance.networks['private-net'][0]
+	self.connection.servers.delete(instance)
+
     def is_volume_attached(self, volume_id, server_id):
         server_volumes_ids = [v.id for v in self.connection.volumes.get_server_volumes(server_id)]
         return (volume_id in server_volumes_ids)
