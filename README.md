@@ -10,6 +10,7 @@ You can use the just the classes or the scripts as well. The scripts just show h
 4. Set environment variables using the OpenStack RC file - more about it [here](http://docs.openstack.org/user-guide/common/cli_set_environment_variables_using_openstack_rc.html).
 
 ### The Configuration Json
+
 To run the scripts in this folder you should have a configuration json in the same folder of your scripts with the name `configuration.json`, and set up the configurations. You can get all the configuration trough Horizon.
 
 ``` 
@@ -21,6 +22,11 @@ To run the scripts in this folder you should have a configuration json in the sa
     "main_ip" : ""
 }
 ```
+-   user --> your username in the OpenStack cloud
+-   project_name --> the project name
+-   project_id --> ~~can you guess what this means?~~ You can get this through Horizon
+-   net_id -> network id of the network your VM's or clusters will use
+-   main_ip --> the main ip of your cloud
 
 ### Play with the code!
 
